@@ -344,7 +344,7 @@
     const accessToken = localStorage.getItem("accessToken") ;
     console.log(accessToken);
 
-       fetch("http://localhost:5000/eligible/scheme",{
+       fetch("https://government-scheme-assistant.onrender.com/eligible/scheme",{
         method : "get",
         headers : {
             authorization : `Bearer ${accessToken}`,
