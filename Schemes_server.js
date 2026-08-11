@@ -1,4 +1,4 @@
-console.log("file is running") ;
+
 
 import express from "express" ;
 import cors from "cors" ;
@@ -240,7 +240,9 @@ catch(error){
 //   "loan for farmers"
 // ]
 // });
-
+app.get("/",(req,res)=>{
+    res.send("backend is running");
+});
 // SIGN UP ROUTE .......
 
 app.post("/signup",async (req,res)=>{
@@ -929,7 +931,8 @@ Do not wrap the answer in html.
         });
     }
 }
-}); 
+});
+
 const PORT = process.env.PORT || 5000; 
 app.listen(PORT,()=>{
     console.log("server started");
