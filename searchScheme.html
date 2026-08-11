@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+    <title>search page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            background-color: #f5f7fa;
+        }
+        .navbar{
+                display: flex;
+                align-items: center;
+                justify-content:flex-start ;
+                border-bottom: 1px solid rgb(213, 200, 200);
+                margin : 15px ;
+                padding-bottom: 15px;
+                gap : 50px;
+            }
+            .logo{
+                height: 30px;
+                width: max-content;
+                padding: 5px;
+                border : 1px solid rgb(213, 200, 200) ;
+                border-radius: 9px;
+                text-align: center;
+                background-color: #fff;
+                font-size: 20px;
+                font-weight: 400;
+                 display: flex;
+                flex-direction: row;
+                gap : 20px;
+                height : max-content;
+            }
+        #app{
+                font-size: 20px;
+                color: rgb(1, 73, 1);
+                font-weight: bolder;
+            }
+        .userid{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap : 2px;
+            }
+            .userlogo{
+                height : 40px;
+                width : 40px;
+                background-color: rgb(1, 73, 1);
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                font-weight: 600;
+                border-radius: 50%;
+            }
+            #menuitem{
+                font-size: 20px;
+                width: max-content;
+                border-radius: 12px;
+                padding: 10px;
+                border: 2px solid rgb(108, 111, 114);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #username {
+                font-size: 18px;
+                font-weight: 600;
+                color: rgb(1, 73, 1);
+            }
+            #userstate{
+                font-size: 15px;
+                color: rgb(121, 126, 131);
+                font-weight: 500;
+            }
+
+        /* navbar code css  */
+
+        .mainitem i{
+            background-color: rgb(1, 73, 1);
+        }
+        .mainitem{
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                color: #fff;
+                font-size: 19px;
+                margin: 20px 0 20px 5px;
+                background-color: rgb(1, 73, 1);
+                padding: 10px;
+            }
+            .mainitem:hover{
+                background-color: rgb(128, 48, 2);
+                border-radius: 12px;
+                color: #fff;
+            }
+        p{
+                margin: 0;
+                padding: 0;
+            }
+            .container{
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                height : max-content;
+                overflow-x: hidden;
+            }
+            .slidebar{
+                background-color: rgb(1, 73, 1);
+                width: 20%;
+                margin-left: -20%;
+                padding: 30px;
+                transition : margin-left 0.3s ease ;
+            }
+            .mainbox{
+                background-color: #f5f7fa;
+                width: 100%;
+                padding: 0 50px 50px 50px;
+                transition: width 0.3s ease;
+                display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            }
+            .container.slide .slidebar{
+               margin-left: 0;
+            }
+            .container.slide .mainbox{
+                width: 80%;
+            }
+            .mainhead{
+                display: flex;
+                flex-direction: row;
+                gap : 10px;
+                margin-bottom: 50px;
+                background-color: rgb(1, 73, 1);
+            }
+            .mainlogo{
+                height: 40px;
+                width : 40px;
+                background-color: rgb(178, 151, 1);
+                border-radius: 12px;
+                color : #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .mainlogo i{
+                background-color: rgb(178, 151, 1);
+            }
+            .mainline{
+                display: flex;
+                flex-direction: column;
+                background-color: rgb(1, 73, 1);
+                gap: 5px;
+            }
+            #slidehead{
+                font-size: 19px;
+                color: #fff;
+                font-weight: 600;
+                text-transform: capitalize;
+                background-color: rgb(1, 73, 1);
+            }
+            #slideline{
+                font-size: 12px;
+                font-weight: bold;
+                color: #8a97a3;
+                text-transform: uppercase;
+                background-color: rgb(1, 73, 1);
+            }
+
+
+        /* Slidebar style  */
+
+
+        .box{
+            display: flex;
+            flex-direction: column;
+        }
+        input{
+            width:300px;
+            height : 30px ;
+            border: 4px solid #e5e7eb;
+            padding: 5px;
+            margin: 1px;
+        }
+        #searchbutton{
+            margin: 20px 0 0 0;
+            background-color: #2563eb;
+            font-size: 20px;
+            color: #fff;
+            font-weight: 600;
+            height: 40px;
+            width: 100px;
+            text-align: center;
+            border: none;
+            border-radius: 1px;
+        }
+        #message{
+            margin : 15px 0 0 0;
+        }
+        #searchbutton:hover{
+            background-color: #5989f1;
+        }
+        .schemebox{
+            width : 90%;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+        }
+        @media (max-width : 728px){
+            .slidebar{
+                    width : 40%;
+                    margin-left: -40%;
+                    padding: 15px;
+                }
+                .mainitem {
+                    font-size: 15px;
+                }
+                .mainbox{
+                    width : 100%;
+                    padding : 20px;
+                }
+                .container.slide .slidebar{
+                    margin-left: 0;
+                }
+                .container.slide .mainbox{
+                    width: 60%;
+                }
+                input{
+                    width : 200px;
+                }
+                .schemebox{
+                    display: flex;
+                    flex-direction: column;
+                    gap : 40px;
+                }
+                .category{
+                    height: max-content;
+                }
+                .schemecard{
+                    width: 100%;
+                }
+        }
+        .loader{
+            display : none;
+            width : 30px ;
+            height : 30px;
+            border-radius: 50%;
+            border: 4px solid #ddd;
+            border-top: 4px solid blue;
+            margin : 5px 0 ;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform : rotate(360deg) ;
+            }
+        }
+        .schemecard{
+            height: max-content;
+            width: 500px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            gap : 15px;
+            border: 2px solid rgb(108, 111, 114);
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .category{
+            font-size: 15px;
+            color: rgb(121, 126, 131);
+            padding: 5px;
+            width: max-content;
+            border: 2px solid rgb(178, 151, 1);
+            border-radius: 10px;
+        }
+        .matches{
+            font-size: 16px;
+            color: rgb(3, 126, 3);
+        }
+        .desc{
+            font-size: 15px;
+            color: rgb(121, 126, 131);
+        }
+        .eligibilitycard{
+            background-color: #fff;
+            padding: 5px;
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            gap : 5px;
+            font-size: 15px;
+            color: rgb(121, 126, 131);
+        }
+        .eligibilitycard h3{
+            color: #000;
+        }
+        .detailcard{
+            padding: 5px;
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            gap : 10px;
+            font-size: 15px;
+            color: rgb(24, 24, 25);
+        }
+        .viewdetails{
+            padding: 10px;
+            background-color: rgb(1, 73, 1);
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            width: max-content;
+            border-radius: 5px;
+        }
+        h4{
+            color: rgb(121, 126, 131);
+        }
+        .networkerror{
+                display: none;
+            font-weight: 500;
+            margin-top: 15px;
+            color: #b42318;
+            background-color: #fef3f2;
+            border: 1px solid #fecdca;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .loaderbox{
+            display : flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+            <i id="menuitem" class="fa-solid fa-sliders"></i>
+                    <div id="app">Government Scheme Assistant</div>
+                </div>
+
+    <div class="container">
+        <div class="slidebar">
+                <div class="mainhead">
+                    <div class="mainlogo"><i class="fa-regular fa-house"></i></div>
+                    <div class="mainline">
+                        <p id="slidehead">scheme assistant</p>
+                        <p id="slideline">government schemes</p>
+                    </div>
+                </div>
+                <div id="dashboard" class="mainitem">
+                    <i class="fa-solid fa-sliders"></i>
+                    Dashboard
+                </div>
+                <div id="searchscheme" class="mainitem">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Search Schemes
+                </div>
+                <div id="eligiblescheme" class="mainitem">
+                    <i class="fa-regular fa-circle-check"></i>
+                    Check Eligibility
+                </div>
+                <div id="aiexplaination" class="mainitem">
+                    <i class="fa-solid fa-comment-nodes"></i>
+                    AI Scheme Assistant
+                </div>
+                <div id="updateprofile" class="mainitem">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Update Profile
+                </div>
+                <div id="logout" class="mainitem">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    logout
+                </div>
+            </div>
+            <div class="mainbox">
+    <div class="box">
+        <H2>Search Schemes</H2>
+        <h4>Find schemes by name, category, benefit or keyword.</h4>
+        <div class="searchbar">
+            <input type="text" placeholder="search schemes" id="usersearch">
+            <button id="searchbutton">search</button>
+        </div>
+        <div class="loaderbox">
+        <div id="loader" class="loader"></div>
+        </div>
+        <message id="message"></message>
+    </div>
+    <div class="schemebox"></div>
+    <div class="networkerror"></div>
+    </div>
+    </div>
+    
+</body>
+<script>
+
+    const homebar = document.getElementById("menuitem");
+        const container = document.querySelector(".container");
+        homebar.addEventListener("click",()=>{
+            container.classList.toggle("slide");
+        });
+    const loader = document.querySelector("#loader");
+
+    const userSearch = document.querySelector("#usersearch");
+    const searchButton = document.querySelector("#searchbutton");
+    const message = document.querySelector("#message");
+    const scheme = document.querySelector("#scheme");
+
+    const schemeBox = document.querySelector(".schemebox");
+     const networkerror = document.querySelector(".networkerror") ;
+    const dashboard = document.querySelector("#dashboard");
+    const searchScheme = document.querySelector("#searchscheme");
+    const eligibleScheme = document.querySelector("#eligiblescheme") ;
+    const aiExplaination = document.querySelector("#aiexplaination") ;
+    const updateProfileButton = document.querySelector("#updateprofile");
+    const logout = document.querySelector("#logout");
+
+    const accessToken = localStorage.getItem("accessToken");
+
+    searchButton.addEventListener("click",(e)=>{
+        e.preventDefault();
+        if(userSearch.value.trim() === ""){
+            message.innerHTML = "Please enter a keyword to search";
+            schemeBox.style.display = "none";
+        }
+
+        else{
+            loader.style.display = "block" ;
+            searchButton.disabled = true ;
+            message.innerHTML = "";
+            schemeBox.innerHTML = "";
+            fetch("http://localhost:5000/search/scheme",{
+                method : "post",
+                headers : {
+                    authorization : `Bearer ${accessToken}`,
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify({
+                    userSearch : `${userSearch.value}`
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                networkerror.style.display = "none" ;
+                if(data.success === true){
+                    schemeBox.style.display = "block" ;
+                    data.schemes.forEach(scheme => {
+                        const schemeCard = document.createElement("div");
+                        const detailCard = document.createElement("div");
+                        const eligibilityCard = document.createElement("div");
+                        schemeCard.classList.add("schemecard") ;
+                        eligibilityCard.classList.add("eligibilitycard");
+                        detailCard.classList.add("detailcard");
+                        schemeCard.innerHTML = `
+                        <h2 >${scheme.scheme_Name}</h2>
+                        <p class="category" >${scheme.scheme_category}</p>
+                        <p class="dexc"> ${scheme.short_description}</p>
+                        <div class="detailbox"></div>
+                        <button class="viewdetails">view details</button>
+                        `;
+                    
+                        const viewDetailsButton = schemeCard.querySelector(".viewdetails");
+                        const detailBox = schemeCard.querySelector(".detailbox");
+                        eligibilityCard.innerHTML = `
+                        <h3> Eligibility Requirements </h3>
+                        <p >Minimum Age : ${scheme.minimum_age}</p>
+                        <p>Maximum Age : ${scheme.maximum_age}</p>
+                        <p>State : ${scheme.state}</p>
+                        <p >Gender : ${scheme.gender}</p>
+                        <p >Cast category : ${scheme.cast_category}</p>
+                        <p >Annual Income : ${scheme.income_limit}</p>
+                        <p>Occupation : ${scheme.occupation}</p>
+                        `;
+                        detailCard.innerHTML = `
+                        <h3> Detailed Information </h3>
+                        <p>Benefits : ${scheme.benefits}</p>
+                        <p>Eligibility : ${scheme.eligibility_criteria}</p>
+                        <p>Required Documents : ${scheme.required_documents}</p>
+                        <p>Application Process : ${scheme.application_process}</p>
+                        <p>Last Updated : ${scheme.last_updated}</p>
+                        `;
+                        viewDetailsButton.addEventListener("click",()=>{
+                            if(detailBox.contains(detailCard) && detailBox.contains(eligibilityCard)){
+                                eligibilityCard.remove();
+                                detailCard.remove();
+                            }
+                            else{
+                                detailBox.appendChild(eligibilityCard);
+                                detailBox.appendChild(detailCard);
+                            }
+                        });
+                        schemeBox.appendChild(schemeCard) ;
+                    });
+                }
+                if(data.success === false){
+                    schemeBox.style.display = "none" ;
+                    message.innerHTML = data.message ;
+                }
+            })
+            .catch((error)=>{
+                networkerror.style.display = "block" ;
+                 networkerror.innerHTML = `⚠️ Unable to connect to the server. Please try again.`;
+                console.log(error);
+            })
+            .finally(()=>{
+                loader.style.display = "none" ;
+                searchButton.disabled = false ;
+            });
+        }
+    });
+
+
+    dashboard.addEventListener("click",()=>{
+        window.location.href = "new_dashboard.html";
+    });
+    aiExplaination.addEventListener("click",()=>{
+        window.location.href = "ai_explaination.html";
+    });
+    eligibleScheme.addEventListener("click",()=>{
+        window.location.href = "eligiblescheme.html" ;
+    });
+    logout.addEventListener("click",()=>{
+        localStorage.removeItem("accessToken") ;
+        window.location.href = "user_login.html" ;
+    });
+    updateProfileButton.addEventListener("click",()=>{
+        window.location.href = "user_updateProfile.html";
+    });
+
+
+</script>
+</html> 

@@ -1,0 +1,24 @@
+{
+  "name": "gov-scheme_project",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "Schemes_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Schemes_server.js"
+  },
+  "keywords": [],
+  "author": "Divyanshi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.8.0",
+    "nodemailer": "^9.0.3",
+    "openai": "^6.49.0"
+  }
+}

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+        <title>new dashboard</title>
+        <style>
+            *{
+                margin : 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+            #app{
+                font-size: 20px;
+                color: rgb(1, 73, 1);
+                font-weight: bolder;
+            }
+            .incompleteprofile{
+                display : none;
+                width : 100% ;
+            }
+            .completeprofile{
+                display : none;
+                height : max-content
+            }
+            #menuitem{
+                font-size: 20px;
+                width: max-content;
+                border-radius: 12px;
+                padding: 10px;
+                border: 2px solid rgb(108, 111, 114);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            p{
+                margin: 0;
+                padding: 0;
+            }
+            .container{
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                height : max-content;
+                overflow-x: hidden;
+            }
+            .slidebar{
+                background-color: rgb(1, 73, 1);
+                width: 20%;
+                margin-left: -20%;
+                padding: 30px;
+                transition : margin-left 0.3s ease ;
+            }
+            .mainbox{
+                background-color: #f5f7fa;
+                width: 100%;
+                padding: 0 50px 50px 50px;
+                transition: width 0.3s ease;
+            }
+            .container.slide .slidebar{
+               margin-left: 0;
+            }
+            .container.slide .mainbox{
+                width: 80%;
+            }
+            .navbar{
+                display: flex;
+                align-items: center;
+                justify-content:space-between ;
+                border-bottom: 1px solid rgb(213, 200, 200);
+                margin : 15px ;
+                padding-bottom: 15px;
+                gap : 10px;
+            }
+            .logo{
+                height: 30px;
+                width: max-content;
+                padding: 5px;
+                border : 1px solid rgb(213, 200, 200) ;
+                border-radius: 9px;
+                text-align: center;
+                background-color: #fff;
+                font-size: 20px;
+                font-weight: 400;
+                 display: flex;
+                flex-direction: row;
+                gap : 20px;
+                height : max-content;
+            }
+            .maincard{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .welcomecard{
+                width: 40%;
+                padding: 30px;
+                background-color: rgb(1, 73, 1) ;
+                color: #fff;
+                border-radius: 12px;
+                margin : 20px;
+                display :flex ;
+                flex-direction: column;
+                gap : 15px ;
+            }
+            #citizen{
+                font-size: 15px;
+                font-weight: bold;
+                color: rgb(169, 122, 3);
+                text-transform: uppercase;
+            }
+            .welcome{
+                font-size: 35px;
+                font-weight: 600;
+                color: #fff;
+                text-transform: capitalize;
+            }
+            .discover{
+                font-size: 18px;
+                font-weight: 500;
+                color: rgb(161, 164, 167);
+            }
+            #askai{
+                height : 40px;
+                background-color:rgb(169, 122, 3) ;
+                color: #000;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 500;
+                border: none;
+                width : 80%;
+                border-radius: 12px;
+            }
+            .eligibilitycard{
+                height : 200px;
+                width: 30%;
+                background-color: #fff;
+                border-radius: 12px;
+                padding: 15px;
+                border : 1px solid rgb(213, 200, 200);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 20px;
+            }
+            .bipart{
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+            .firstpart{
+                height : 70px;
+                width : 70px;
+                border-radius: 50%;
+                border : 8px solid rgb(123, 105, 1) ;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+                font-weight: bold;
+            }
+            .secondpart{
+                width: 60%;
+                display : flex ;
+                flex-direction: column;
+                gap : 8px;
+            }
+            #youmay{
+                font-size: 20px;
+                font-weight: 600;
+                color: rgb(1,73,1);
+            }
+            #based , .featureline{
+                font-size: 15px;
+                font-weight: 400;
+                color: rgb(86, 85, 85);
+                letter-spacing: 1px;
+            }
+            #viewbutton , .explorescheme{
+                background-color: rgb(1, 73, 1);
+                color: #fff;
+                font-size: 20px;
+                font-weight: 400;
+                height : 40px ;
+                width : 80% ;
+                border: none;
+                border-radius: 12px;
+            }
+            .profilenavbar{
+                display : flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                border-bottom: 2px solid rgb(199, 237, 199);
+            }
+            .profilebox{
+                width : 100%;
+                background-color: #fff;
+                border-radius: 12px;
+                border : 1px solid rgb(213, 200, 200) ;
+            }
+            .profilelogo{
+                display : flex;
+                flex-direction: row;
+                gap : 15px;
+            }
+            .namebox{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .symbolbox{
+                height : 50px;
+                width : 50px;
+                border-radius: 12px;
+                background-color: rgb(1, 73, 1);
+                color :#fff;
+                font-size: 23px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+            }
+            #name{
+                font-size: 20px;
+                font-weight: bold;
+                color: #000;
+            }
+            #profilestatus {
+                font-size: 15px;
+                font-weight:bold ;
+                color: rgb(1, 73, 1);
+                padding: 4px;
+                width : max-content;
+                border-radius: 8px;
+                background-color: rgb(199, 237, 199);
+                text-transform: capitalize;
+                text-align: center;
+            }
+            .editbox{
+                width: max-content;
+                padding: 10px;
+                text-transform: capitalize;
+                font-size: 18px;
+                color: #000;
+                font-weight: bold;
+                border-radius: 12px;
+                border: 2px solid rgb(199, 237, 199);
+            }
+            .infoitem {
+                display : flex;
+                flex-direction: row;
+                gap : 15px;
+            }
+            .infologo , .featurelogo{
+                width : 50px;
+                height : 50px;
+                border-radius: 12px;
+                background-color: rgb(212, 230, 244);
+                display : flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                flex-direction: column;
+                gap : 5px;
+            }
+            .infocard{
+                display : grid;
+                grid-template-columns: repeat(2,1fr);
+                gap : 20px;
+                padding : 30px;
+            }
+            .infohead{
+                font-size: 13px;
+                color: rgb(108, 111, 114);
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .infoinput{
+                font-size: 18px;
+                font-weight: bold;
+                color: #000;
+            }
+            .featurebox{
+                display : grid ;
+                grid-template-columns: repeat(2,1fr);
+                gap : 30px;
+            }
+            .feature{
+                height : max-content;
+                width : 400px;
+                padding: 25px;
+                border-radius: 12px;
+                background-color: #fff;
+                border : 2px solid rgb(199, 237, 199);
+                border-top: 4px solid rgb(171, 146, 3);
+                display: flex;
+                flex-direction: column;
+                gap : 16px;
+            }
+            .featureline{
+                font-size: 16px;
+            }
+            .featurename{
+                font-size: 20px;
+                font-weight: 600;
+                color: rgb(1, 73, 1);
+                text-transform: capitalize;
+            }
+            .headname{
+                font-size: 23px;
+                font-weight: 600;
+                color: rgb(1, 73, 1);
+                margin : 25px 0 20px 0;
+            }
+            .mainhead{
+                display: flex;
+                flex-direction: row;
+                gap : 10px;
+                margin-bottom: 50px;
+            }
+            .mainlogo{
+                height: 40px;
+                width : 40px;
+                background-color: rgb(178, 151, 1);
+                border-radius: 12px;
+                color : #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .mainline{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            #slidehead{
+                font-size: 19px;
+                color: #fff;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+            #slideline{
+                font-size: 12px;
+                font-weight: bold;
+                color: #8a97a3;
+                text-transform: uppercase;
+            }
+            .mainitem{
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                color: #fff;
+                font-size: 19px;
+                margin: 20px 0 20px 5px;
+                padding: 10px;
+            }
+            .mainitem:hover{
+                background-color: rgb(128, 48, 2);
+                border-radius: 12px;
+                color: #fff;
+            }
+            .userid{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap : 2px;
+            }
+            .userlogo{
+                height : 40px;
+                width : 40px;
+                background-color: rgb(1, 73, 1);
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                font-weight: 600;
+                border-radius: 50%;
+            }
+            #username {
+                font-size: 18px;
+                font-weight: 600;
+                color: rgb(1, 73, 1);
+            }
+            #userstate{
+                font-size: 15px;
+                color: rgb(121, 126, 131);
+                font-weight: 500;
+            }
+            #completeProfileButton{
+                background-color: rgb(179, 153, 3);
+                color: #fff;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 5px;
+                height: 35px;
+                
+            }
+            @media(max-width : 768px){
+                .slidebar{
+                    width : 40%;
+                    margin-left: -40%;
+                    padding: 15px;
+                }
+                .mainitem {
+                    font-size: 15px;
+                }
+                .mainbox{
+                    width : 100%;
+                    padding : 20px;
+                }
+                .container.slide .slidebar{
+                    margin-left: 0;
+                }
+                .container.slide .mainbox{
+                    width: 60%;
+                }
+                .featurebox{
+                    display : flex;
+                    flex-direction: column;
+                    gap : 30px;
+                }
+                .feature{
+                    width : 300px;
+                }
+                .infocard{
+                    display : flex;
+                    flex-direction: column;
+                    gap : 20px;
+                }
+                .profilebox{
+                    width : max-content;
+                }
+                .welcomecard{
+                    width : max-content;
+                    padding: 15px;
+                    margin : 20px 0 ;
+                }
+                .eligibilitycard{
+                    width: max-content;
+                    height: max-content;
+                    padding: 10px;
+                }
+                .firstpart{
+                    height:40px;
+                    width : 40px;
+                    font-size: 15px;
+                }
+                #youmay{
+                    font-size: 16px;
+                }
+                #based{
+                    font-size: 13px;
+                }
+                #viewbutton{
+                    height : max-content;
+                    font-size: 15px;
+                }
+                .bipart{
+                    flex-direction: column;
+                }
+                .maincard{
+                    justify-content: space-between;
+                }
+                .userlogo{
+                    height: 30px;
+                    width: 30px;
+                }
+                #username {
+                    font-size: 16px;
+                }
+                .logo{
+                    gap :10px;
+                }
+                .incompleteprofile{
+                    margin : 50px; 
+                }
+                .incompleteprofile .welcomecard{
+                    width: 400px;
+                }
+            }
+            .networkerror{
+                display: none;
+                text-align: center;
+            font-weight: 500;
+            margin-top: 15px;
+            color: #b42318;
+            background-color: #fef3f2;
+            border: 1px solid #fecdca;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+            .loader{
+            display : none;
+            width : 30px ;
+            height : 30px;
+            text-align: center;
+            border-radius: 50%;
+            border: 4px solid #ddd;
+            border-top: 4px solid blue;
+            margin : 5px 0 ;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform : rotate(360deg) ;
+            }
+        }
+        .loaderbox{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        </style>
+
+    </head>
+    <body>
+        <div class="navbar">
+            <i id="menuitem" class="fa-solid fa-sliders"></i>
+                    <div id="app">Government Scheme Assistant</div>
+                    <div class="logo">
+                        <div class="userlogo"></div>
+                        <div class="userid">
+                            <p id="username"></p>
+                            <p id="userstate"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="loaderbox">
+                    <div class="loader"></div>
+                </div>
+                
+                <div class="networkerror">
+                </div>
+        <div class="incompleteprofile" > 
+                    <div  class="welcomecard">
+                        <p id="citizen">citizen dashboard</p>
+                        <p class="welcome" id="greet1"></p>
+                        <p class="discover">Your profile is incomplete.</p>
+                        <p class="discover">Complete your profile to discover government schemes you are eligible for.</p>
+                        <button id="completeProfileButton">Complete Profile</button>
+                    </div>
+        </div>
+
+        <div class="completeprofile">
+            <div class="container">
+            <div class="slidebar">
+                <div class="mainhead">
+                    <div class="mainlogo"><i class="fa-regular fa-house"></i></div>
+                    <div class="mainline">
+                        <p id="slidehead">scheme assistant</p>
+                        <p id="slideline">government schemes</p>
+                    </div>
+                </div>
+                <div class="mainitem">
+                    <i class="fa-solid fa-sliders"></i>
+                    Dashboard
+                </div>
+                <div id="searchscheme" class="mainitem">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Search Schemes
+                </div>
+                <div id="eligiblescheme" class="mainitem">
+                    <i class="fa-regular fa-circle-check"></i>
+                    Check Eligibility
+                </div>
+                <div id="aiexplaination" class="mainitem">
+                    <i class="fa-solid fa-comment-nodes"></i>
+                    AI Scheme Assistant
+                </div>
+                <div id="updateprofile" class="mainitem">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Update Profile
+                </div>
+                <div id="logout" class="mainitem">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    logout
+                </div>
+            </div>
+            <div class="mainbox">
+                <div class="maincard">
+                    <div  class="welcomecard">
+                        <p id="citizen">citizen dashboard</p>
+                        <p class="welcome" id="greet2"></p>
+                        <p class="discover">Discover government benefits designed for you.</p>
+                        <button id="askai">Ask AI Assistant -> </button>
+                    </div>
+                    <div class="eligibilitycard">
+                        <div class="bipart">
+                            <div class="firstpart"></div>
+                            <div class="secondpart">
+                                <p id="youmay">You may be eligible for schemes</p>
+                                <p id="based">Based on your income, occupation and state profile.</p>
+                            </div>
+                        </div>
+                        <button id="viewbutton">view eligible schemes</button>
+                    </div>
+                </div>
+                <div class="headname">Citizen Profile</div>
+                <div class="profilebox">
+                    <div class="profilenavbar">
+                        <div class="profilelogo">
+                            <div class="symbolbox"></div>
+                            <div class="namebox">
+                                <p id="name" ></p>
+                                <p id="profilestatus"></p>
+                            </div>
+                        </div>
+                        <div class="editbox">edit profile</div>
+                    </div>
+                    <div class="infocard">
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-timeline"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">age</p>
+                                <p id="age" class="infoinput"></p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-person"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">gender</p>
+                                <p id="gender" class="infoinput"></p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">state</p>
+                                <p id="state" class="infoinput"></p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">occupation</p>
+                                <p id="occupation" class="infoinput"></p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-dollar-sign"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">annual income</p>
+                                <p id="income" class="infoinput"></p>
+                            </div>
+                        </div>
+                        <div class="infoitem">
+                            <div class="infologo"><i class="fa-solid fa-check-to-slot"></i></div>
+                            <div class="infobox">
+                                <p class="infohead">category</p>
+                                <p id="category" class="infoinput"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="headname">What would you like to do ?</div>
+                <div class="featurebox">
+                    <div class="feature">
+                        <div class="featurelogo"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="featurename">search government schemes</div>
+                        <div class="featureline">Find schemes by name, category or keyword.</div>
+                        <button class="explorescheme">Explore schemes</button>
+                    </div>
+                    <div class="feature">
+                        <div class="featurelogo"><i class="fa-regular fa-circle-check"></i></div>
+                        <div class="featurename">eligible schemes</div>
+                        <div class="featureline">Get personalised scheme recommendations based on your profile.</div>
+                        <button class="explorescheme"> Eligible schemes</button>
+                    </div>
+                    <div class="feature">
+                        <div class="featurelogo"><i class="fa-solid fa-comment-nodes"></i></div>
+                        <div class="featurename">ask ai assistant</div>
+                        <div class="featureline">Ask questions and receive simple explanations about government schemes.</div>
+                        <button class="explorescheme">Ask AI</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+    <script>
+        const homebar = document.getElementById("menuitem");
+        const container = document.querySelector(".container");
+        homebar.addEventListener("click",()=>{
+            container.classList.toggle("slide");
+        });
+
+        const incompleteProfile = document.querySelector(".incompleteprofile");
+        const completeProfile = document.querySelector(".completeprofile");
+         const networkerror = document.querySelector(".networkerror") ;
+        const symbolbox = document.querySelector(".symbolbox");
+        const userlogo = document.querySelector(".userlogo");
+
+        const askai = document.getElementById("askai");
+        const viewbutton = document.getElementById("viewbutton");
+        const loader = document.querySelector(".loader");
+
+        const completeProfileButton = document.querySelector("#completeProfileButton");
+
+        const name = document.querySelector("#name") ;
+        const greet1 = document.querySelector("#greet1");
+        const greet2 = document.querySelector("#greet2");
+        const username = document.querySelector("#username");
+    const age = document.querySelector("#age");
+    const gender = document.querySelector("#gender");
+    const state = document.querySelector("#state");
+    const userstate = document.querySelector("#userstate");
+    const occupation = document.querySelector("#occupation");
+    const income = document.querySelector("#income");
+    const category = document.querySelector("#category");
+    const profileStatus = document.querySelector("#profilestatus");
+
+    const searchScheme = document.querySelector("#searchscheme");
+    const eligibleScheme = document.querySelector("#eligiblescheme") ;
+    const aiExplaination = document.querySelector("#aiexplaination") ;
+    const updateProfileButton = document.querySelector("#updateprofile");
+    const logout = document.querySelector("#logout");
+
+    const accessToken = localStorage.getItem("accessToken") ;
+    console.log(accessToken);
+
+   
+    loader.style.display = "block";
+    fetch("http://localhost:5000/dashboard",{
+        method : "post",
+        headers : {
+            "Content-Type" : "application/json",
+            authorization : `Bearer ${accessToken}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        networkerror.style.display = "none";
+        loader.style.display = "block";
+        if(data.message === "token expired"){
+            localStorage.removeItem("accessToken");
+            window.location.href = "user_login.html" ;
+        }
+        
+        if(data.profileCompleted === false){
+            incompleteProfile.style.display = "block";
+            completeProfile.style.display = "none";
+            userlogo.innerHTML = `${data.username[0].toUpperCase()}`;
+            greet1.innerHTML = `Welcome back, ${data.username} 👋`;
+            username.innerHTML = `${data.username}` ;
+            userstate.innerHTML = "";
+        }
+        if(data.profileCompleted === true){
+            incompleteProfile.style.display = "none";
+            completeProfile.style.display = "block";
+            greet2.innerHTML = `Welcome back, ${data.username} 👋`,
+            username.innerHTML = `${data.username}` ,
+            name.innerHTML = `${data.name.toUpperCase()}`,
+            age.innerHTML = `${data.age}`,
+            gender.innerHTML = `${data.gender}`,
+            state.innerHTML = `${data.state}`,
+            userstate.innerHTML = `${data.state}`,
+            occupation.innerHTML = ` ${data.occupation}`,
+            income.innerHTML = `${data.income}`,
+            category.innerHTML = ` ${data.category}`,
+            symbolbox.innerHTML = `${data.username[0].toUpperCase()}`,
+            userlogo.innerHTML = `${data.username[0].toUpperCase()}`,
+            profileStatus.innerHTML = `Profile ${data.profileStatus}`
+        }     
+})
+.catch(error=>{
+        networkerror.style.display = "block" ;
+            networkerror.innerHTML = `⚠️ Unable to connect to server . Please try again.`;
+        })
+.finally(()=>{
+                    loader.style.display = "none" ;
+                    
+                });
+    
+    
+
+    completeProfileButton.addEventListener("click",()=>{
+        window.location.href = "user_completeProfile.html";
+    });
+    searchScheme.addEventListener("click",()=>{
+        window.location.href = "searchScheme.html";
+    });
+    aiExplaination.addEventListener("click",()=>{
+        window.location.href = "ai_explaination.html";
+    });
+    eligibleScheme.addEventListener("click",()=>{
+        window.location.href = "eligiblescheme.html" ;
+    });
+    logout.addEventListener("click",()=>{
+        localStorage.removeItem("accessToken") ;
+        window.location.href = "user_login.html" ;
+    });
+    updateProfileButton.addEventListener("click",()=>{
+        window.location.href = "user_updateProfile.html";
+    });
+
+    askai.addEventListener("click",()=>{
+        window.location.href = "ai_explaination.html" ;
+    });
+    viewbutton.addEventListener("click",()=>{
+        window.location.href = "eligiblescheme.html";
+    });
+    </script>
+</html>

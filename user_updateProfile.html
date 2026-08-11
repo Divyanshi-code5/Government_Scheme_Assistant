@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>update profile page</title>
+        <style>
+            body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            flex-direction: column;
+            background-color: #f5f7fa;
+        }
+        #logo{
+            top: 5px;
+            left: 5px;
+            color: #16a34a;
+            font-size: 30px;
+            font-weight: 700;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            margin : 20px 0 0 30px;
+        }
+        .box{
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            margin : 20px 0 0 50px ;
+        }
+        .error{
+            color: rgb(217, 5, 5);
+            font-size: 15px;
+        }
+        .inputlabel{
+            font-size: 18px;
+        }
+        .othereducationshow , .otheroccupationshow{
+            display: flex;
+            flex-direction: column;
+        }
+        #heading{
+            font-size: 25px;
+            font-weight: 600;
+            color : #111;
+            margin: 0 0 30px 0;
+            margin : 10px 0 ;
+        }
+        .inputlabel{
+            font-size: 20px;
+            color: #1f2937;
+            font-weight: 500;
+        }
+        input  {
+            width:300px;
+            height : 30px ;
+            border: 4px solid #e5e7eb;
+            padding: 5px;
+            margin: 5px;
+        }
+        label {
+             margin : 0 0 7px 0;
+        }
+        select{
+            width : 250px ;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: #fff;
+            color : #333;
+            cursor: pointer;
+            outline: none;
+            margin : 7px 0;
+        }
+        .genderbox , .categotybox{
+            display : flex;
+            align-items: normal;
+            flex-direction: row;
+            text-align: center;
+        }
+        .gender , .disability , .category{
+            width : 14px;
+        }
+        #submitbutton{
+            margin: 20px 0 50px 0;
+            background-color: #2563eb;
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            height: 45px;
+            width: 20%;
+            text-align: center;
+            border: none;
+            border-radius: 1px;
+        }
+        #submitbutton:hover{
+            background-color: #5989f1;
+        }
+        #othereducationbox , #otheroccupationbox{
+            display: none;
+        }
+        #message {
+            font-size: 25px;
+            font-weight: 600;
+            margin : 15px 0 25px 0 ;
+            color:#16a34a;
+        }
+        .loader{
+            display : none;
+            width : 30px ;
+            height : 30px;
+            border-radius: 50%;
+            border: 4px solid #ddd;
+            border-top: 4px solid blue;
+            margin : 5px 0 ;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform : rotate(360deg) ;
+            }
+        }
+        .networkerror{
+                display: none;
+                text-align: center;
+            font-weight: 500;
+            margin-top: 15px;
+            color: #b42318;
+            background-color: #fef3f2;
+            border: 1px solid #fecdca;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        <message id="logo">Government Scheme Assistant</message>
+        <message id="heading">Update Profile</message>
+    </div>
+    <div class="box">
+        <label class="inputlabel">Full Name</label>
+        <input type="text" id="fullname" placeholder="e.g. Gopal Singh">
+        <label class="error" id="fullnameerror"></label>
+
+        <label class="inputlabel">Age</label>
+        <input type="number" id="age" placeholder="e.g.  25">
+        <label class="error"  id="ageerror"></label>
+
+        <label class="inputlabel">Gender</label>
+        <div class="genderbox">
+            <input type="radio" class="gender" name="gender" value="male">
+            <label>male</label>
+        </div>
+        <div class="genderbox">
+            <input type="radio" class="gender" name="gender" value="female">
+            <label>female</label>
+        </div>
+        <div class="genderbox">
+            <input type="radio" class="gender" name="gender" value="other">
+            <label>other</label>
+        </div>
+        <div class="genderbox">
+            <input type="radio" class="gender" name="gender" value="prefer not to say">
+            <label>undisclosed</label>
+        </div>
+        <label class="error"  id="gendererror"></label>
+
+        <label class="inputlabel">select your state</label>
+        <select name="state" id="state">
+            <option value="">select state</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerela">Kerela</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+            <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Dadra & Nagar Haveli">Dadra & Nagar Haveli</option>
+            <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+            <option value="Ladakh">Ladakh</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="National Capital Territory of Delhi">National Capital Territory of Delhi</option>
+            <option value="Puducherry">Puducherry</option>
+        </select>
+        <label class="error"  id="stateerror"></label>
+
+        <label class="inputlabel">District (optional)</label>
+        <input type="text" id="district" placeholder="enter District name only">
+
+        <label class="inputlabel">Annual Family Income (in Rupees)</label>
+        <input type="number" id="familyincome" placeholder="e.g. 250000">
+        <label class="error"  id="familyincomeerror"></label>
+
+        <label class="inputlabel">Category</label>
+        <div class="categotybox">
+            <input type="radio" name="category" class="category" value="General">
+            <label>General</label>
+        </div>
+        <div class="categotybox">
+            <input type="radio" name="category" class="category" value="OBC">
+            <label>OBC</label>
+        </div>
+        <div class="categotybox">
+            <input type="radio" name="category" class="category" value="EWS">
+            <label>EWS</label>
+        </div>
+        <div class="categotybox">
+            <input type="radio" name="category" class="category" value="SC">
+            <label>SC</label>
+        </div>
+        <div class="categotybox">
+            <input type="radio" name="category" class="category" value="ST">
+            <label>ST</label>
+        </div>
+        <label class="error"  id="categoryerror"></label>
+
+        <label class="inputlabel">Disablity</label>
+        <div class="disablitybox">
+            <input type="radio" name="disability" class="disability" value="yes">yes
+            <input type="radio" name="disability" class="disability" value="no">no
+        </div>
+        <label class="error"  id="disabilityerror"></label>
+
+        <label class="inputlabel">Highest Education</label>
+        <select name="education" id="education">
+            <option value="">select education level</option>
+            <option value="Below class 10">Below class 10</option>
+            <option value="class 10">class 10</option>
+            <option value="class 12">class 12</option>
+            <option value="diploma">diploma</option>
+            <option value="undergraduate">undergraduate</option>
+            <option value="post-graduate">post-graduate</option>
+            <option value="PhD">PhD</option>
+            <option value="other">other</option>
+        </select>
+        <div id="othereducationbox" class="othereducationshow">
+        <label class="inputlabel">Enter Education Level</label>
+        <input type="text" id="othereducation" placeholder="enter your education level">
+        </div>
+        <label class="error"  id="educationerror"></label>
+
+        <label class="inputlabel">Occupation</label>
+        <select name="occupation" id="occupation">
+            <option value="">select occupation</option>
+            <option value="Student">Student</option>
+            <option value="Farmer">Farmer</option>
+            <option value="Government Employee">Government Employee</option>
+            <option value="Private Sector Employee">Private Sector Employee</option>
+            <option value="Self-employed">Self-employed</option>
+            <option value="Buisness Owner">Buisness Owner</option>
+            <option value="MSME Owner">MSME Owner</option>
+            <option value="Homemaker">Homemaker</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Job Seeker">Job Seeker</option>
+            <option value="Senior Citizen">Senior Citizen</option>
+            <option value="Unorganised Sector worker">Unorganised Sector worker</option>
+            <option value="Daily wage worker">Daily wage worker</option>
+            <option value="Retired">Retired</option>
+            <option value="other">Other</option>
+        </select>
+        <div id="otheroccupationbox" class="otheroccupationshow">
+        <label class="inputlabel">Enter occupation</label>
+        <input type="text" id="otheroccupation" placeholder="enter your occupation">
+        </div>
+        <label class="error"  id="occupationerror"></label>
+
+        <button id="submitbutton">update profile</button>
+        <div id="loader" class="loader"></div>
+        <message id="message"></message>
+        <div class="networkerror"></div>
+    </div> 
+
+    </body>
+
+    <script>
+        const accessToken = localStorage.getItem("accessToken");
+
+    const loader = document.querySelector("#loader");
+
+    const submitButton = document.querySelector("#submitbutton") ;
+    const message = document.querySelector("#message") ;
+
+    const otheroccupationbox = document.querySelector("#otheroccupationbox");
+    const othereducationbox = document.querySelector("#othereducationbox");
+const networkerror = document.querySelector(".networkerror") ;
+
+    const fullName = document.querySelector("#fullname");
+    const age = document.querySelector("#age");
+    const genderRadios = document.querySelectorAll(".gender");
+    const state = document.querySelector("[name='state']");
+    const familyIncome = document.querySelector("#familyincome");
+    const categoryRadios = document.querySelectorAll(".category");
+    const disabilityRadios = document.querySelectorAll(".disability");
+    const education = document.querySelector("[name='education']");
+    const occupation = document.querySelector("[name='occupation']");
+    const district = document.querySelector("#district");
+
+    const fullNameError = document.querySelector("#fullnameerror");
+    const ageError = document.querySelector("#ageerror");
+    const genderError = document.querySelector("#gendererror");
+    const stateError = document.querySelector("#stateerror");
+    const familyIncomeError = document.querySelector("#familyincomeerror");
+    const categoryError = document.querySelector("#categoryerror");
+    const disabilityError = document.querySelector("#disabilityerror");
+    const educationError = document.querySelector("#educationerror");
+    const occupationError = document.querySelector("#occupationerror");
+
+    const otherEducationShow = document.querySelector(".othereducationshow");
+    const otherOccupationShow = document.querySelector(".otheroccupationshow");
+    
+    const otherEducation = document.querySelector("#othereducation");
+    const otherOccupation = document.querySelector("#otheroccupation");
+
+
+    fetch("http://localhost:5000/profile",{
+        method : "post",
+        headers : {
+            authorization : `Bearer ${accessToken}`,
+            "Content-Type" : "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success === true){
+        fullName.value = data.fullname ;
+        age.value = data.age ;
+        state.value = data.state ;
+        education.value = data.education ;
+        occupation.value = data.occupation ;
+        district.value = data.district ;
+        otherOccupation.value = data.otherOccupation ;
+        otherEducation.value = data.otherEducation ;
+        document.querySelector(`input[name="gender"][value="${data.gender}"]`).checked = true ;
+        document.querySelector(`input[name="category"][value="${data.category}"]`).checked = true ;
+        document.querySelector(`input[name="disability"][value="${data.disability}"]`).checked = true ;
+        familyIncome.value = data.income ;
+        }
+        else{
+            message.innerHTML = data.message ;
+        }
+    });
+
+    function genderValidation(){
+        const gender = document.querySelector("input[name='gender']:checked");
+            if(!gender){
+                genderError.innerHTML = "please select a gender";
+                return false;
+            }
+            else{
+                genderError.innerHTML = "";
+                return true;
+            }
+    }
+    function stateValidation(){
+        if(state.value === ""){
+            stateError.innerHTML = "please select your state" ;
+            return false;
+        }
+        else{
+            stateError.innerHTML = "" ;
+            return true;
+        }
+    }
+    function categoryValidation(){
+        const category = document.querySelector("input[name='category']:checked");
+            if(!category){
+                categoryError.innerHTML = "please select a category";
+                return false;
+            }
+            else{
+                categoryError.innerHTML = "";
+                return true;
+            }
+    }
+    function disabilityValidation(){
+         const disability = document.querySelector("input[name='disability']:checked");
+            if(!disability){
+                disabilityError.innerHTML = "please select your disability status";
+                return false;
+            }
+            else{
+                disabilityError.innerHTML = "";
+                return true;
+            }
+    }
+    function educationValidation(){
+        if(education.value === ""){
+            educationError.innerHTML = "please select your education level";
+            return false;
+        }
+        else{
+            educationError.innerHTML = "";
+            return true;
+        }
+    }
+    function occupationValidation(){
+        if(occupation.value === ""){
+            occupationError.innerHTML = "please select your occupation";
+            return false;
+        }
+        else{
+            occupationError.innerHTML = "";
+            return true;
+        }
+    }
+
+    function otherEducationValidation(){
+        if(education.value === "other"){
+        if(otherEducation.value.trim() === ""){
+                educationError.innerHTML = "your education level is required";
+                return false ;
+            }
+            else if(!education.value.match(/^[A-Za-z ]{5,}$/)){
+                educationError.innerHTML = "only alphabets are allowed";
+                return false ;
+            }
+            else{
+                educationError.innerHTML = "";
+                return true ;
+            }
+        }
+        else {
+        return true ;
+    }
+    }
+    function otherOccupationValidation(){
+        if(occupation.value === "other"){
+        if(otherOccupation.value.trim() === ""){
+            occupationError.innerHTML = "your occupation is required";
+        }
+        else if(!occupation.value.match(/^[A-Za-z ]{5,}$/)){
+            occupationError.innerHTML = "only alphabets are allowed";
+        }
+        else{
+            occupationError.innerHTML = "";
+        }
+    }
+    else {
+        return true ;
+    }
+    }
+
+    otherEducation.addEventListener("blur",()=>{
+        if(education.value === "other"){
+        if(otherEducation.value.trim() === ""){
+                educationError.innerHTML = "your education level is required";
+                return false ;
+            }
+            else if(!education.value.match(/^[A-Za-z ]{5,}$/)){
+                educationError.innerHTML = "only alphabets are allowed";
+                return false ;
+            }
+            else{
+                educationError.innerHTML = "";
+                return true ;
+            }
+        }
+    });
+
+    otherOccupation.addEventListener("blur",()=>{
+        if(occupation.value === "other"){
+        if(otherOccupation.value.trim() === ""){
+            occupationError.innerHTML = "your occupation is required";
+            return false ;
+        }
+        else if(!occupation.value.match(/^[A-Za-z ]{5,}$/)){
+            occupationError.innerHTML = "only alphabets are allowed";
+            return false ;
+        }
+        else{
+            occupationError.innerHTML = "";
+            return true ;
+        }
+    }
+    });
+    fullName.addEventListener("blur",()=>{
+        if(fullName.value.trim() === ""){
+            fullNameError.innerHTML = "fullname is required";
+        }
+        else if(!fullName.value.match(/^[A-Za-z ]{5,}$/)){
+            fullNameError.innerHTML = "only alphabets are allowed";
+        }
+        else{
+            fullNameError.innerHTML = "";
+        }
+    });
+    age.addEventListener("blur",()=>{
+        if(age.value.trim() === ""){
+            ageError.innerHTML = "age is required";
+        }
+        else if(!age.value.match(/^[0-9]{1,3}$/)){
+            ageError.innerHTML = "only numbers are allowed";
+        }
+        else{
+            ageError.innerHTML = "";
+        }
+    });
+    genderRadios.forEach((radio)=>{
+        radio.addEventListener("change",genderValidation);
+    });
+    state.addEventListener("change",stateValidation);
+
+    familyIncome.addEventListener("blur",()=>{
+        if(familyIncome.value.trim() === ""){
+            familyIncomeError.innerHTML = "family income is reqired" ;
+        }
+        else if(!familyIncome.value.match(/^[0-9]{0,}$/)){
+            familyIncomeError.innerHTML = "only numbers are allowed" ;
+        }
+        else{
+            familyIncomeError.innerHTML = "" ;
+        }
+    });
+    categoryRadios.forEach((radio)=>{
+        radio.addEventListener("change",categoryValidation);
+    });
+    disabilityRadios.forEach((radio)=>{
+        radio.addEventListener("change",disabilityValidation);
+    });
+    education.addEventListener("change",()=>{
+        if(education.value === "other"){
+            othereducationbox.style.display = "block" ;
+        }
+        else{
+            othereducationbox.style.display = "none" ;
+        }
+        educationValidation();
+    });
+    occupation.addEventListener("change",()=>{
+        if(occupation.value === "other"){
+            otheroccupationbox.style.display = "block";
+        }
+        else{
+            otheroccupationbox.style.display = "none";
+        }
+        occupationValidation();
+    });
+
+    function fullNameValidation(){
+        if(fullName.value.trim() === ""){
+            fullNameError.innerHTML = "fullname is required";
+            return false;
+        }
+        else if(!fullName.value.match(/^[A-Za-z ]{5,}$/)){
+            fullNameError.innerHTML = "only alphabets are allowed";
+            return false ;
+        }
+        else{
+            fullNameError.innerHTML = "";
+            return true ;
+        }
+    }
+    function ageValidation(){
+        if(age.value.trim() === ""){
+            ageError.innerHTML = "age is required";
+            return false;
+        }
+        else if(!age.value.match(/^[0-9]{1,3}$/)){
+            ageError.innerHTML = "only numbers are allowed";
+            return false;
+        }
+        else{
+            ageError.innerHTML = "";
+            return true;
+        }
+    }
+    function incomeValidation(){
+        if(familyIncome.value.trim() === ""){
+            familyIncomeError.innerHTML = "family income is reqired" ;
+            return false;
+        }
+        else if(!familyIncome.value.match(/^[0-9]{0,}$/)){
+            familyIncomeError.innerHTML = "only numbers are allowed" ;
+            return false;
+        }
+        else{
+            familyIncomeError.innerHTML = "" ;
+            return true;
+        }
+    }
+    
+    
+    submitButton.addEventListener("click",(e)=>{
+        e.preventDefault();
+        if(!fullNameValidation()){
+            console.log("fullname error");
+            return ;
+        }
+        if(!ageValidation()){
+            console.log("age error");
+            return ;
+        }
+        if(!genderValidation()){
+            console.log("gender error");
+            return ;
+        }
+        if(!stateValidation()){
+            console.log("state error");
+            return ;
+        }
+        if(!incomeValidation()){
+            console.log("income error");
+            return ;
+        }
+        if(!categoryValidation()){
+            console.log("category error");
+            return ;
+        }
+        if(!disabilityValidation()){
+            console.log("disability error");
+            return ;
+        }
+        if(!educationValidation()){
+            console.log("education error");
+            return ;
+        }
+        if(!otherEducationValidation()){
+            console.log("other education error");
+            return ;
+        }
+        if(!occupationValidation()){
+            console.log("occupation error");
+            return ;
+        }
+        if(!otherOccupationValidation()){
+            console.log("other occupation error");
+            return ;
+        }
+        else{
+            loader.style.display = "block";
+            submitButton.disabled = true ;
+            const gender = document.querySelector("input[name='gender']:checked");
+            const category = document.querySelector("input[name='category']:checked");
+            const disability = document.querySelector("input[name='disability']:checked");
+            
+           fetch("http://localhost:5000/complete/profile",{
+            method : "post",
+            headers : {
+                "Content-Type" : "application/json",
+                authorization : `Bearer ${accessToken}`
+            },
+            body : JSON.stringify({
+                fullname : `${fullName.value}`,
+                age : `${age.value}`,
+                gender : `${gender.value}`,
+                state : `${state.value}`,
+                income : `${familyIncome.value}`,
+                category : `${category.value}`,
+                disability : `${disability.value}`,
+                education : `${education.value}`,
+                otherEducation : `${otherEducation.value}`,
+                occupation : `${occupation.value}`,
+                otherOccupation : `${otherOccupation.value}`,
+                district : `${district.value}`
+            })
+           })
+           .then(res => res.json())
+           .then(data => {
+            networkerror.style.display = "none" ;
+            message.innerHTML = data.message ;
+            if(data.success){
+            window.location.href = "new_dashboard.html";
+        }
+           })
+           .catch((error)=>{
+            networkerror.style.display = "block" ;
+             networkerror.innerHTML = `⚠️ Unable to connect to the server. Please try again.`;
+            console.log(error) ;
+           })
+           .finally(()=>{
+            loader.style.display = "none";
+            submitButton.disabled = false ;
+           });
+        }
+    });
+    </script>
+</html>

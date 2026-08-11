@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height : 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            flex-direction: column;
+            background-color: #f5f7fa;
+        }
+        .container{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height : 350px;
+            width : 400px;
+            border-radius: 12px;
+            flex-direction: column;
+            background-color: #ffffff;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+            padding: 20px;
+        }
+        .box{
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            height : 200px;
+            width : 250px;
+        }
+        input{
+            width:100%;
+            height : 25px ;
+            border: 4px solid #e5e7eb;
+            padding: 5px;
+            margin: 1px;
+        }
+        label{
+            font-size: 20px;
+            color: #1f2937;
+            font-weight: 400;
+        }
+        #submitbutton{
+            margin: 20px 0 0 0;
+            background-color: #2563eb;
+            font-size: 20px;
+            color: #fff;
+            height: 40px;
+            width: 50%;
+            text-align: center;
+            border: none;
+            border-radius: 1px;
+        }
+        #submitbutton:hover{
+            background-color: #5989f1;
+        }
+        .error , .notverified{
+            color: rgb(221, 5, 5);
+            font-size: 17px;
+        }
+        #heading{
+            font-size: 30px;
+            font-weight: 600;
+            color : #111;
+            margin: 0 0 10px 0;
+        }
+        .verified{
+            color: #16a34a;
+            font-size: 20px;
+        }
+        #logo{
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            color: #16a34a;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        @media (max-width : 768px){
+            .container{
+                width : 300px;
+                height : 400px;
+            }
+        }
+        .loader{
+            display : none;
+            width : 30px ;
+            height : 30px;
+            border-radius: 50%;
+            border: 4px solid #ddd;
+            border-top: 4px solid blue;
+            margin : 5px 0 ;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform : rotate(360deg) ;
+            }
+        }
+        #forgot{
+            border: none;
+            outline: none;
+            background-color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .networkerror{
+                display: none;
+            font-weight: 500;
+            margin-top: 15px;
+            color: #b42318;
+            background-color: #fef3f2;
+            border: 1px solid #fecdca;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <message id="logo">Government Scheme Assistant</message>
+        <message id="heading">login</message>
+    <div class="box">
+        <label>email</label>
+        <input type="text" id="email">
+        <label class="error" id="emailerror"></label>
+
+        <label>password</label>
+        <input type="text" id="password">
+        <label class="error" id="passworderror"></label>
+    </div>
+    <button id="submitbutton">submit</button>
+    <button id="forgot">Forgot Password ? </button>
+    <div id="loader" class="loader"></div>
+        <message id="message"></message>
+        <div class="networkerror"></div>
+    </div>
+    
+</body>
+<script>
+    const loader = document.querySelector("#loader");
+
+    const email = document.querySelector("#email") ;
+    const password = document.querySelector("#password") ;
+    const forgotButton = document.querySelector("#forgot");
+    forgotButton.addEventListener("click",()=>{
+        window.location.href = "user_forgotPassword.html";
+    });
+
+    const emailError = document.querySelector("#emailerror") ;
+    const passwordError = document.querySelector("#passworderror") ;
+     const networkerror = document.querySelector(".networkerror") ;
+
+    const submitButton = document.querySelector("#submitbutton") ;
+    const message = document.querySelector("#message") ;
+
+    email.addEventListener("blur",()=>{
+        if(email.value.trim() === ""){
+            emailError.innerHTML = "email is required" ;
+        }
+        else if(!email.value.match(/^[A-Za-z0-9]+@[a-z]+\.(com|in)$/)){
+            emailError.innerHTML = "invalid email format" ;
+        }
+        else {
+            emailError.innerHTML = "" ;
+        }
+    });
+    password.addEventListener("blur",()=>{
+        if(password.value.trim() === ""){
+            passwordError.innerHTML = "password is required" ;
+        }
+        else if(!password.value.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/)){
+            passwordError.innerHTML = "require A-Za-z0-9!@#$%^&* and atleast 8 characters" ;
+        }
+        else {
+            passwordError.innerHTML = "" ;
+        }
+    });
+
+    function emailValidation(){
+        if(email.value.trim() === ""){
+            emailError.innerHTML = "email is required";
+            return false ;
+        }
+        else if(!email.value.match(/^[A-Za-z0-9]+@[a-z]+\.(com|in)$/)){
+            emailError.innerHTML = "require proper email format";
+            return false ;
+        }
+        else{
+            emailError.innerHTML = "";
+            return true ;
+        }
+    }
+
+    function passwordValidation(){
+        if(password.value.trim() === ""){
+            passwordError.innerHTML = "password is required";
+            return false ;
+        }
+        else if(!password.value.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/)){
+            passwordError.innerHTML = "require A-Za-z0-9!@#$%^&* & atleast 8 letters";
+            return false ;
+        }
+        else{
+            passwordError.innerHTML = "";
+            return true ;
+        }
+    }
+
+    submitButton.addEventListener("click",(e)=>{
+        e.preventDefault();
+        if(!emailValidation()){
+            console.log("email error");
+        }
+        if(!passwordValidation()){
+            console.log("password error");
+        }
+        else{
+            loader.style.display = "block";
+            submitButton.disabled = true ;
+            fetch("http://localhost:5000/login",{
+                method : "post",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify({
+                    email : `${email.value.toLowerCase()}`,
+                    password : `${password.value}`
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                networkerror.style.display = "none" ;
+                if(data.message === "token expired"){
+                    localStorage.removeItem("accessToken") ;
+                    window.location.href = "user_login.html";
+                }
+                if(data.field === "email"){
+                    emailError.innerHTML = data.message ;
+                }
+                if(data.field === "password"){
+                    passwordError.innerHTML = data.message ;
+                }
+                if(data.field === "success"){
+                    message.classList.remove("notverified") ;
+                    message.classList.add("verified") ;
+                    message.innerHTML = data.message ;
+                }
+                if(data.field === "failure"){
+                    message.classList.remove("verified") ;
+                    message.classList.add("notverified") ;
+                    message.innerHTML = data.message ;
+                }
+                const accessToken = localStorage.setItem("accessToken",data.accessToken);
+                if(data.success){
+                    window.location.href = "new_dashboard.html";
+                }
+            })
+            .catch((error)=>{
+                networkerror.style.display = "block" ;
+                 networkerror.innerHTML = `⚠️ Unable to connect to the server. Please try again.`;
+                console.log(error);
+            })
+            .finally(()=>{
+                loader.style.display = "none" ;
+                submitButton.disabled = false ;
+            });
+        }
+    });
+</script>
+</html>
