@@ -440,7 +440,7 @@
             searchButton.disabled = true ;
             message.innerHTML = "";
             schemeBox.innerHTML = "";
-            fetch("http://localhost:5000/search/scheme",{
+            fetch("https://government-scheme-assistant.onrender.com/search/scheme",{
                 method : "post",
                 headers : {
                     authorization : `Bearer ${accessToken}`,
